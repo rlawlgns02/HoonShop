@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>지훈 렌탈샵 | 스키·보드 장비 렌탈 · 리프트권 · 강습</title>
+<meta name="description" content="지훈 렌탈샵 - 스키·보드 장비 및 의류 렌탈, 리프트권 패키지, 스키·보드 강습">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root {
+    --navy: #0b2545;
+    --blue: #0050c8;
+    --red: #d7261e;
+    --ink: #111111;
+    --body: #333333;
+    --gray: #6a6f78;
+    --line: #d6d9de;
+    --line-dark: #111111;
+    --bg: #f4f5f7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; border-radius: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+  body { font-family: 'Pretendard', -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 16px; color: var(--body); line-height: 1.65; background: #fff; word-break: keep-all; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; }
+  .inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* ===== 유틸 바 ===== */
+  .util { background: var(--navy); color: #c7d1e0; font-size: 13px; }
+  .util .inner { display: flex; justify-content: space-between; height: 36px; align-items: center; }
+  .util strong { color: #fff; font-weight: 600; }
+
+  /* ===== 헤더 ===== */
+  #header { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid var(--line); }
+  #header .inner { display: flex; align-items: center; height: 84px; }
+  .logo { display: flex; flex-direction: column; line-height: 1.15; margin-right: auto; }
+  .logo b { font-size: 26px; font-weight: 800; color: var(--navy); letter-spacing: -0.8px; }
+  .logo span { font-size: 11px; font-weight: 600; color: var(--gray); letter-spacing: 2.4px; }
+  .gnb { display: flex; height: 100%; }
+  .gnb > li { list-style: none; position: relative; }
+  .gnb > li > a { display: flex; align-items: center; height: 84px; padding: 0 22px; font-size: 17px; font-weight: 600; color: var(--ink); border-bottom: 3px solid transparent; }
+  .gnb > li:hover > a { color: var(--blue); border-bottom-color: var(--blue); }
+  .gnb .sub { display: none; position: absolute; top: 84px; left: 0; min-width: 100%; background: #fff; border: 1px solid var(--line); border-top: 0; }
+  .gnb > li:hover .sub { display: block; }
+  .gnb .sub a { display: block; padding: 11px 22px; font-size: 15px; white-space: nowrap; color: var(--body); }
+  .gnb .sub a:hover { background: var(--bg); color: var(--blue); }
+  .hd-btn { margin-left: 18px; background: var(--blue); color: #fff; font-weight: 700; padding: 0 26px; height: 46px; display: flex; align-items: center; }
+  .hd-btn:hover { background: var(--navy); }
+  .m-menu { display: none; background: none; border: 0; width: 44px; height: 44px; margin-left: 10px; position: relative; }
+  .m-menu i { position: absolute; left: 10px; right: 10px; height: 2px; background: var(--ink); }
+  .m-menu i:nth-child(1) { top: 14px; } .m-menu i:nth-child(2) { top: 21px; } .m-menu i:nth-child(3) { top: 28px; }
+
+  /* ===== 메인 비주얼 ===== */
+  .visual { background: var(--navy); color: #fff; position: relative; overflow: hidden; }
+  .visual .inner { display: grid; grid-template-columns: 1fr 360px; gap: 48px; padding-top: 88px; padding-bottom: 120px; position: relative; z-index: 2; }
+  .visual .label { display: inline-block; font-size: 14px; font-weight: 700; letter-spacing: 1px; color: #fff; background: var(--red); padding: 5px 12px; margin-bottom: 22px; }
+  .visual h1 { font-size: clamp(34px, 5vw, 56px); font-weight: 800; line-height: 1.25; letter-spacing: -1.5px; }
+  .visual p.lead { font-size: 19px; margin-top: 20px; color: #d3dcea; }
+  .visual .btns { margin-top: 36px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; height: 56px; padding: 0 34px; font-size: 17px; font-weight: 700; border: 2px solid transparent; }
+  .btn-white { background: #fff; color: var(--navy); }
+  .btn-white:hover { background: #e6ebf3; }
+  .btn-line { border-color: #fff; color: #fff; }
+  .btn-line:hover { background: #fff; color: var(--navy); }
+  .today { background: #fff; color: var(--ink); align-self: start; border-top: 4px solid var(--blue); }
+  .today h2 { font-size: 18px; font-weight: 700; padding: 20px 24px 14px; border-bottom: 1px solid var(--line); }
+  .today dl { padding: 8px 24px 20px; }
+  .today dl div { display: flex; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid #eceef1; font-size: 15px; }
+  .today dl div:last-child { border-bottom: 0; }
+  .today dt { color: var(--gray); }
+  .today dd { font-weight: 700; }
+  .today .tel { display: block; background: var(--bg); text-align: center; padding: 16px; font-size: 24px; font-weight: 800; color: var(--blue); }
+  .visual svg { position: absolute; left: 0; bottom: 0; width: 100%; height: 160px; z-index: 1; }
+
+  /* ===== 퀵 정보 ===== */
+  .quick { border-bottom: 1px solid var(--line); }
+  .quick ul { display: grid; grid-template-columns: repeat(4, 1fr); list-style: none; }
+  .quick li { border-left: 1px solid var(--line); }
+  .quick li:last-child { border-right: 1px solid var(--line); }
+  .quick a { display: block; padding: 28px 26px; }
+  .quick a:hover { background: var(--bg); }
+  .quick small { display: block; font-size: 13px; font-weight: 700; color: var(--blue); letter-spacing: 1px; }
+  .quick b { display: block; font-size: 19px; color: var(--ink); margin-top: 4px; }
+  .quick span { font-size: 14px; color: var(--gray); }
+
+  /* ===== 섹션 공통 ===== */
+  .sec { padding: 100px 0; }
+  .sec.gray { background: var(--bg); }
+  .sec-title { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid var(--line-dark); padding-bottom: 18px; margin-bottom: 36px; gap: 20px; flex-wrap: wrap; }
+  .sec-title h2 { font-size: 34px; font-weight: 800; color: var(--ink); letter-spacing: -1px; line-height: 1.2; }
+  .sec-title h2 small { display: block; font-size: 14px; font-weight: 700; color: var(--blue); letter-spacing: 2px; margin-bottom: 8px; }
+  .sec-title p { color: var(--gray); font-size: 15px; }
+
+  /* ===== 탭 ===== */
+  .tab { display: flex; border: 1px solid var(--line); border-bottom: 0; margin-bottom: 0; }
+  .tab button { flex: 1; height: 58px; background: #fff; border: 0; border-right: 1px solid var(--line); font-size: 17px; font-weight: 600; color: var(--gray); }
+  .tab button:last-child { border-right: 0; }
+  .tab button.on { background: var(--navy); color: #fff; }
+  .panel { display: none; }
+  .panel.on { display: block; }
+
+  /* ===== 테이블 ===== */
+  .tbl-wrap { overflow-x: auto; border-top: 2px solid var(--line-dark); }
+  .tab + .panel .tbl-wrap, .tab ~ .panel .tbl-wrap { border-top: 0; }
+  table { width: 100%; border-collapse: collapse; background: #fff; font-size: 16px; min-width: 720px; }
+  th, td { border: 1px solid var(--line); padding: 16px 14px; text-align: center; }
+  thead th { background: #eef1f5; color: var(--ink); font-weight: 700; }
+  tbody th { background: #fafbfc; color: var(--ink); font-weight: 700; text-align: left; padding-left: 22px; }
+  td.pt { font-weight: 700; color: var(--ink); }
+  td.em { font-weight: 800; color: var(--blue); }
+  tr > :first-child { border-left: 0; } tr > :last-child { border-right: 0; }
+  .scroll-guide { display: none; font-size: 13px; color: var(--gray); padding: 10px 0; }
+  .notes { margin-top: 18px; list-style: none; font-size: 15px; color: var(--gray); }
+  .notes li { padding-left: 12px; position: relative; margin-top: 4px; }
+  .notes li::before { content: ''; position: absolute; left: 0; top: 11px; width: 4px; height: 4px; background: var(--gray); }
+
+  /* ===== 패키지 ===== */
+  .pkg { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); background: #fff; }
+  .pkg > div { padding: 34px 30px; border-right: 1px solid var(--line); position: relative; }
+  .pkg > div:last-child { border-right: 0; }
+  .pkg .best { outline: 3px solid var(--blue); outline-offset: -3px; }
+  .pkg .best::before { content: 'BEST'; position: absolute; top: 0; right: 0; background: var(--blue); color: #fff; font-size: 12px; font-weight: 800; padding: 5px 12px; letter-spacing: 1px; }
+  .pkg h3 { font-size: 20px; color: var(--ink); }
+  .pkg .desc { font-size: 14px; color: var(--gray); margin-top: 4px; }
+  .pkg .price { margin: 22px 0; }
+  .pkg .price del { display: block; font-size: 15px; color: #9aa0a8; }
+  .pkg .price strong { font-size: 34px; font-weight: 800; color: var(--ink); letter-spacing: -1px; }
+  .pkg .price em { font-style: normal; font-size: 15px; font-weight: 800; color: var(--red); margin-left: 8px; }
+  .pkg ul { list-style: none; border-top: 1px solid var(--line); }
+  .pkg li { padding: 11px 0; border-bottom: 1px solid #eceef1; font-size: 15px; }
+
+  /* ===== 이용 절차 ===== */
+  .step { display: grid; grid-template-columns: repeat(4, 1fr); list-style: none; border: 1px solid var(--line); background: #fff; counter-reset: step; }
+  .step li { padding: 32px 28px; border-right: 1px solid var(--line); counter-increment: step; }
+  .step li:last-child { border-right: 0; }
+  .step li::before { content: 'STEP 0' counter(step); display: block; font-size: 13px; font-weight: 800; color: var(--blue); letter-spacing: 1px; margin-bottom: 10px; }
+  .step b { display: block; font-size: 20px; color: var(--ink); margin-bottom: 8px; }
+  .step p { font-size: 15px; color: var(--gray); }
+
+  /* ===== 장비 라인업 ===== */
+  .lineup { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 2px solid var(--line-dark); }
+  .lineup > div { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 28px 26px; }
+  .lineup > div:nth-child(4n+1) { border-left: 1px solid var(--line); }
+  .lineup .cat { font-size: 13px; font-weight: 700; color: var(--blue); }
+  .lineup h3 { font-size: 19px; color: var(--ink); margin: 6px 0 10px; }
+  .lineup p { font-size: 15px; color: var(--gray); }
+  .lineup .lv { display: inline-block; margin-top: 14px; font-size: 13px; font-weight: 700; border: 1px solid var(--ink); color: var(--ink); padding: 2px 8px; }
+
+  /* ===== 예약 ===== */
+  .rsv { display: grid; grid-template-columns: 1fr 380px; gap: 0; border: 1px solid var(--line); background: #fff; }
+  .rsv form { padding: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px 18px; }
+  .field { display: flex; flex-direction: column; gap: 8px; }
+  .field.full { grid-column: 1 / -1; }
+  .field label { font-size: 15px; font-weight: 700; color: var(--ink); }
+  .field label em { color: var(--red); font-style: normal; }
+  .field input, .field select, .field textarea { font: inherit; font-size: 16px; padding: 0 14px; height: 52px; border: 1px solid #b9bec6; background: #fff; color: var(--ink); }
+  .field textarea { height: auto; padding: 14px; resize: vertical; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--blue); outline-offset: -2px; border-color: var(--blue); }
+  .agree { grid-column: 1 / -1; display: flex; gap: 8px; align-items: center; font-size: 15px; }
+  .agree input { width: 18px; height: 18px; accent-color: var(--blue); }
+  .rsv form .btn { grid-column: 1 / -1; background: var(--blue); color: #fff; height: 60px; font-size: 18px; border: 0; }
+  .rsv form .btn:hover { background: var(--navy); }
+  .rsv aside { background: var(--navy); color: #fff; padding: 40px 36px; }
+  .rsv aside h3 { font-size: 20px; margin-bottom: 4px; }
+  .rsv aside .big { font-size: 32px; font-weight: 800; letter-spacing: -0.5px; margin: 6px 0 24px; display: block; }
+  .rsv aside dl div { border-top: 1px solid rgba(255,255,255,.18); padding: 14px 0; font-size: 15px; }
+  .rsv aside dt { color: #9fb0c8; font-size: 13px; font-weight: 600; }
+
+  /* ===== 공지 / 오시는 길 ===== */
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+  .two .sec-title h2 { font-size: 26px; }
+  .two .sec-title a { font-size: 14px; color: var(--gray); }
+  .board { list-style: none; }
+  .board li a { display: flex; gap: 14px; align-items: center; padding: 17px 4px; border-bottom: 1px solid var(--line); }
+  .board li a:hover .t { text-decoration: underline; }
+  .board .k { flex: none; font-size: 13px; font-weight: 700; color: #fff; background: var(--ink); padding: 2px 8px; }
+  .board .k.r { background: var(--red); }
+  .board .t { flex: 1; font-size: 16px; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .board time { flex: none; font-size: 14px; color: var(--gray); }
+  .map { height: 240px; background: #e9ecf0; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 15px; }
+  .loc { width: 100%; border-collapse: collapse; min-width: 0; margin-top: 0; font-size: 15px; }
+  .loc th, .loc td { border: 0; border-bottom: 1px solid var(--line); padding: 14px 4px; text-align: left; }
+  .loc th { width: 96px; background: none; color: var(--ink); padding-left: 4px; }
+
+  /* ===== 푸터 ===== */
+  #footer { background: #1a1d22; color: #9aa1ab; font-size: 14px; }
+  .f-top { border-bottom: 1px solid #2d3139; }
+  .f-top ul { display: flex; list-style: none; height: 54px; align-items: center; gap: 28px; }
+  .f-top a { color: #d4d8de; }
+  .f-top a b { color: #fff; }
+  .f-body { padding: 36px 0 44px; }
+  .f-logo { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 14px; }
+  .f-info p { margin-top: 3px; }
+  .f-info span { margin-right: 10px; }
+  .f-info span + span::before { content: ''; display: inline-block; width: 1px; height: 11px; background: #4a505a; margin-right: 10px; vertical-align: -1px; }
+  .copy { margin-top: 18px; color: #6c727c; font-size: 13px; }
+
+  /* ===== 모바일 하단 고정 바 ===== */
+  .m-bar { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; grid-template-columns: 1fr 1fr; }
+  .m-bar a { height: 58px; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 700; color: #fff; }
+  .m-bar a:first-child { background: var(--navy); }
+  .m-bar a:last-child { background: var(--blue); }
+
+  /* ===== 팝업 ===== */
+  .pop { position: fixed; top: 140px; left: 40px; z-index: 200; width: 400px; max-width: calc(100% - 32px); background: #fff; border: 1px solid #222; box-shadow: 0 6px 24px rgba(0,0,0,.25); }
+  .pop[hidden] { display: none; }
+  .pop-head { background: var(--navy); color: #fff; padding: 26px 28px 22px; }
+  .pop-head small { display: block; font-size: 13px; font-weight: 700; color: #ffcf3f; letter-spacing: 1px; }
+  .pop-head h2 { font-size: 24px; font-weight: 800; line-height: 1.3; margin-top: 6px; letter-spacing: -0.5px; }
+  .pop-body { padding: 24px 28px 26px; font-size: 15px; }
+  .pop-body table { min-width: 0; font-size: 15px; margin: 14px 0 18px; }
+  .pop-body th, .pop-body td { padding: 10px 8px; }
+  .pop-body th { text-align: left; width: 40%; padding-left: 10px; }
+  .pop-body td { text-align: right; font-weight: 800; color: var(--red); padding-right: 10px; }
+  .pop-body tr > :first-child { border-left: 1px solid var(--line); } .pop-body tr > :last-child { border-right: 1px solid var(--line); }
+  .pop-body .go { display: flex; height: 50px; align-items: center; justify-content: center; background: var(--blue); color: #fff; font-weight: 700; }
+  .pop-foot { display: flex; background: #222; }
+  .pop-foot button { flex: 1; height: 44px; background: none; border: 0; color: #ddd; font-size: 14px; }
+  .pop-foot button + button { border-left: 1px solid #444; }
+  .pop-foot button:hover { color: #fff; }
+
+  /* ===== 반응형 ===== */
+  @media (max-width: 1080px) {
+    .gnb, .hd-btn { display: none; }
+    .m-menu { display: block; }
+    #header.open .gnb { display: block; position: absolute; top: 72px; left: 0; right: 0; background: #fff; border-bottom: 2px solid var(--ink); max-height: calc(100vh - 72px); overflow-y: auto; }
+    #header.open .gnb > li > a { height: 56px; padding: 0 24px; border-bottom: 1px solid var(--line); }
+    #header.open .gnb .sub { display: block; position: static; border: 0; background: var(--bg); }
+    #header .inner { height: 72px; }
+    .visual .inner { grid-template-columns: 1fr; padding-top: 60px; padding-bottom: 110px; }
+    .today { max-width: 480px; }
+    .quick ul { grid-template-columns: repeat(2, 1fr); }
+    .quick li { border-bottom: 1px solid var(--line); }
+    .quick li:nth-child(2n) { border-right: 1px solid var(--line); }
+    .pkg, .step { grid-template-columns: 1fr; }
+    .pkg > div, .step li { border-right: 0; border-bottom: 1px solid var(--line); }
+    .pkg > div:last-child, .step li:last-child { border-bottom: 0; }
+    .lineup { grid-template-columns: repeat(2, 1fr); }
+    .lineup > div:nth-child(4n+1) { border-left: 0; }
+    .lineup > div:nth-child(2n+1) { border-left: 1px solid var(--line); }
+    .rsv { grid-template-columns: 1fr; }
+    .two { grid-template-columns: 1fr; gap: 72px; }
+    .scroll-guide { display: block; }
+  }
+  @media (max-width: 640px) {
+    body { padding-bottom: 58px; }
+    .inner { padding: 0 16px; }
+    .util .inner span:last-child { display: none; }
+    .logo b { font-size: 22px; }
+    .sec { padding: 72px 0; }
+    .sec-title h2 { font-size: 28px; }
+    .visual p.lead { font-size: 17px; }
+    .btn { height: 52px; padding: 0 24px; font-size: 16px; }
+    .quick a { padding: 20px 16px; }
+    .quick b { font-size: 17px; }
+    .tab button { font-size: 15px; height: 52px; }
+    .lineup { grid-template-columns: 1fr; }
+    .lineup > div { border-left: 1px solid var(--line); }
+    .rsv form { grid-template-columns: 1fr; padding: 26px 20px; }
+    .rsv aside { padding: 30px 20px; }
+    .f-top ul { gap: 18px; font-size: 13px; }
+    .m-bar { display: grid; }
+    .pop { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+  }
+</style>
+</head>
+<body>
+
+<!-- 레이어 팝업 -->
+<div class="pop" id="pop" role="dialog" aria-labelledby="popTitle" hidden>
+  <div class="pop-head">
+    <small>2026/27 SEASON OPEN</small>
+    <h2 id="popTitle">시즌 오픈 기념<br>사전예약 할인 안내</h2>
+  </div>
+  <div class="pop-body">
+    <p>온라인으로 사전예약하시는 모든 고객님께 아래 할인 혜택을 드립니다.</p>
+    <table>
+      <tr><th>장비 렌탈</th><td>20% 할인</td></tr>
+      <tr><th>장비 + 의류 세트</th><td>25% 할인</td></tr>
+      <tr><th>리프트 패키지</th><td>최대 30% 할인</td></tr>
+    </table>
+    <a href="#reserve" class="go" id="popGo">사전예약 바로가기</a>
+  </div>
+  <div class="pop-foot">
+    <button type="button" id="popToday">오늘 하루 보지 않기</button>
+    <button type="button" id="popClose">닫기</button>
+  </div>
+</div>
+
+<div class="util">
+  <div class="inner">
+    <span>고객센터 <strong>010-0000-0000</strong></span>
+    <span>시즌 영업시간 <strong>07:00 ~ 03:00</strong> (연중무휴)</span>
+  </div>
+</div>
+
+<header id="header">
+  <div class="inner">
+    <a href="#top" class="logo"><b>지훈 렌탈샵</b><span>JIHOON SKI RENTAL</span></a>
+    <ul class="gnb">
+      <li><a href="#info">렌탈샵 소개</a>
+        <div class="sub"><a href="#info">이용 안내</a><a href="#location">오시는 길</a></div></li>
+      <li><a href="#price">요금 안내</a>
+        <div class="sub"><a href="#price" data-tab="rental">렌탈 요금</a><a href="#price" data-tab="lift">리프트 패키지</a><a href="#price" data-tab="lesson">강습 요금</a><a href="#price" data-tab="damage">분실·파손 규정</a></div></li>
+      <li><a href="#lineup">장비·의류</a></li>
+      <li><a href="#reserve">예약·문의</a></li>
+      <li><a href="#notice">공지사항</a></li>
+    </ul>
+    <a href="#reserve" class="hd-btn">온라인 예약</a>
+    <button type="button" class="m-menu" id="mMenu" aria-label="전체 메뉴"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<main id="top">
+  <!-- 메인 비주얼 -->
+  <section class="visual">
+    <div class="inner">
+      <div>
+        <span class="label">사전예약 최대 30% 할인</span>
+        <h1>스키장 입구 바로 앞,<br>시즌 신품 장비 렌탈</h1>
+        <p class="lead">스키 · 보드 · 의류 렌탈부터 리프트권, 강습까지<br>지훈 렌탈샵에서 한 번에 준비하세요.</p>
+        <div class="btns">
+          <a href="#reserve" class="btn btn-white">온라인 예약하기</a>
+          <a href="#price" class="btn btn-line">요금 확인하기</a>
+        </div>
+      </div>
+      <div class="today">
+        <h2>영업 안내</h2>
+        <dl>
+          <div><dt>주간 영업</dt><dd>07:00 ~ 17:00</dd></div>
+          <div><dt>야간 영업</dt><dd>17:00 ~ 23:00</dd></div>
+          <div><dt>심야 영업</dt><dd>23:00 ~ 03:00</dd></div>
+          <div><dt>주차</dt><dd>무료 (매장 앞)</dd></div>
+        </dl>
+        <a href="tel:010-0000-0000" class="tel">010-0000-0000</a>
+      </div>
+    </div>
+    <svg viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true">
+      <polygon points="0,160 0,110 220,40 420,100 640,20 860,96 1080,36 1300,92 1440,60 1440,160" fill="#13325c"/>
+      <polygon points="0,160 0,136 300,84 560,130 820,78 1100,128 1440,96 1440,160" fill="#ffffff"/>
+    </svg>
+  </section>
+
+  <!-- 퀵 정보 -->
+  <section class="quick">
+    <div class="inner">
+      <ul>
+        <li><a href="#price"><small>PRICE</small><b>렌탈 요금</b><span>장비 · 의류 요금표</span></a></li>
+        <li><a href="#price" data-tab="lift"><small>PACKAGE</small><b>리프트 패키지</b><span>리프트권 + 장비 할인</span></a></li>
+        <li><a href="#price" data-tab="lesson"><small>LESSON</small><b>강습 안내</b><span>개인 · 그룹 · 키즈</span></a></li>
+        <li><a href="#location"><small>LOCATION</small><b>오시는 길</b><span>주소 · 주차 안내</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 요금 안내 -->
+  <section class="sec" id="price">
+    <div class="inner">
+      <div class="sec-title">
+        <h2><small>PRICE</small>요금 안내</h2>
+        <p>대인 · 소인 동일 요금이며, 모든 금액은 부가세 포함입니다.</p>
+      </div>
+
+      <div class="tab" id="priceTab">
+        <button type="button" class="on" data-tab="rental">렌탈 요금</button>
+        <button type="button" data-tab="lift">리프트 패키지</button>
+        <button type="button" data-tab="lesson">강습 요금</button>
+        <button type="button" data-tab="damage">분실·파손 규정</button>
+      </div>
+
+      <div class="panel on" id="p-rental">
+        <p class="scroll-guide">표를 좌우로 밀어서 확인하세요.</p>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr><th>이용 시간</th><th>스탠다드 스키/보드</th><th>하이엔드 스키/보드</th><th>스탠다드 의류</th><th>프리미엄 의류</th><th>장비 + 의류 세트</th><th>숏스키</th></tr>
+            </thead>
+            <tbody>
+              <tr><th>주간 2~4시간</th><td>20,000원</td><td>40,000원</td><td>20,000원</td><td>30,000원</td><td class="em">35,000원</td><td>30,000원</td></tr>
+              <tr><th>주간 5~7시간</th><td>30,000원</td><td>50,000원</td><td>30,000원</td><td>40,000원</td><td class="em">50,000원</td><td>40,000원</td></tr>
+              <tr><th>야간 18:00~23:00</th><td>25,000원</td><td>45,000원</td><td>25,000원</td><td>35,000원</td><td class="em">42,000원</td><td>35,000원</td></tr>
+              <tr><th>심야 23:00~03:00</th><td>20,000원</td><td>40,000원</td><td>20,000원</td><td>30,000원</td><td class="em">35,000원</td><td>30,000원</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul class="notes">
+          <li>보호대 · 헬멧 각 5,000원 / 고글 10,000원 / 바이저 헬멧 15,000원</li>
+          <li>대여 시 신분증을 제시해 주세요. 미성년자는 보호자 동반 시 대여 가능합니다.</li>
+        </ul>
+      </div>
+
+      <div class="panel" id="p-lift">
+        <div class="pkg">
+          <div>
+            <h3>주간 리프트 + 장비</h3>
+            <p class="desc">가볍게 즐기는 기본 패키지</p>
+            <div class="price"><del>89,000원</del><strong>65,000원</strong><em>27%</em></div>
+            <ul><li>주간 리프트권 1매</li><li>스탠다드 스키 또는 보드</li><li>개인 보관함 무료</li></ul>
+          </div>
+          <div class="best">
+            <h3>올인원 패키지</h3>
+            <p class="desc">장비부터 의류까지 빈손으로</p>
+            <div class="price"><del>129,000원</del><strong>89,000원</strong><em>31%</em></div>
+            <ul><li>주간 리프트권 1매</li><li>스탠다드 장비 + 의류</li><li>헬멧 · 고글 무료 대여</li></ul>
+          </div>
+          <div>
+            <h3>야간 리프트 + 장비</h3>
+            <p class="desc">퇴근 후 즐기는 야간 스키</p>
+            <div class="price"><del>75,000원</del><strong>55,000원</strong><em>27%</em></div>
+            <ul><li>야간 리프트권 1매</li><li>스탠다드 스키 또는 보드</li><li>개인 보관함 무료</li></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="p-lesson">
+        <p class="scroll-guide">표를 좌우로 밀어서 확인하세요.</p>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>강습 구분</th><th>인원</th><th>시간</th><th>요금 (1인)</th><th>비고</th></tr></thead>
+            <tbody>
+              <tr><th>개인 강습</th><td>1:1</td><td>2시간</td><td class="pt">150,000원</td><td>실력별 맞춤 커리큘럼</td></tr>
+              <tr><th>커플 · 친구 강습</th><td>1:2</td><td>2시간</td><td class="pt">100,000원</td><td>동일 레벨 권장</td></tr>
+              <tr><th>그룹 강습</th><td>1:3 ~ 1:5</td><td>2시간</td><td class="pt">70,000원</td><td>입문자 대상</td></tr>
+              <tr><th>키즈 강습</th><td>1:1 ~ 1:2</td><td>2시간</td><td class="pt">120,000원</td><td>만 5세 이상</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul class="notes"><li>강습 요금에는 리프트권과 장비 렌탈이 포함되어 있지 않습니다.</li></ul>
+      </div>
+
+      <div class="panel" id="p-damage">
+        <p class="scroll-guide">표를 좌우로 밀어서 확인하세요.</p>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>품목</th><th>분실 시</th><th>파손 시</th></tr></thead>
+            <tbody>
+              <tr><th>스키 플레이트 · 보드 데크</th><td class="pt">400,000원</td><td>파손 상태에 따라 상이</td></tr>
+              <tr><th>스키 부츠</th><td class="pt">300,000원</td><td>파손 상태에 따라 상이</td></tr>
+              <tr><th>보드 부츠</th><td class="pt">250,000원</td><td>파손 상태에 따라 상이</td></tr>
+              <tr><th>스키 폴</th><td class="pt">50,000원</td><td class="pt">50,000원</td></tr>
+              <tr><th>헬멧</th><td class="pt">80,000원</td><td>렌즈 스크래치 30,000원</td></tr>
+              <tr><th>고글</th><td class="pt">60,000원</td><td>렌즈 스크래치 30,000원</td></tr>
+              <tr><th>의류</th><td>-</td><td>찢어짐 · 특수세탁 20,000원</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 이용 안내 -->
+  <section class="sec gray" id="info">
+    <div class="inner">
+      <div class="sec-title">
+        <h2><small>GUIDE</small>이용 안내</h2>
+        <p>예약부터 반납까지, 대기 없이 빠르게 진행됩니다.</p>
+      </div>
+      <ol class="step">
+        <li><b>온라인 예약</b><p>이용 날짜와 인원, 사이즈를 미리 남겨주시면 장비를 준비해 둡니다.</p></li>
+        <li><b>매장 방문</b><p>예약자 성함 확인 후 신분증을 제시해 주세요. 매장 앞 무료 주차 가능.</p></li>
+        <li><b>장비 피팅</b><p>전문 스태프가 키 · 체중 · 실력에 맞춰 장비를 조정해 드립니다.</p></li>
+        <li><b>이용 후 반납</b><p>이용 시간 내 매장으로 반납해 주세요. 보관함은 무료입니다.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 장비 라인업 -->
+  <section class="sec" id="lineup">
+    <div class="inner">
+      <div class="sec-title">
+        <h2><small>EQUIPMENT</small>장비 · 의류 라인업</h2>
+        <p>매 시즌 신품으로 교체하며, 이용 후 즉시 정비 · 세탁합니다.</p>
+      </div>
+      <div class="lineup">
+        <div><span class="cat">SKI</span><h3>스탠다드 스키</h3><p>회전이 쉬운 카빙 스키로 입문 · 초급자에게 적합합니다.</p><span class="lv">입문 ~ 중급</span></div>
+        <div><span class="cat">SKI</span><h3>하이엔드 스키</h3><p>엣지 그립이 뛰어난 상급자용 레이싱 · 카빙 모델.</p><span class="lv">중급 ~ 상급</span></div>
+        <div><span class="cat">SKI</span><h3>숏스키</h3><p>짧고 가벼워 다루기 쉬운 숏스키 · 블레이드.</p><span class="lv">전 레벨</span></div>
+        <div><span class="cat">SKI</span><h3>스키 부츠</h3><p>사이즈별 전 품목 구비, 열 성형 깔창 사용.</p><span class="lv">전 레벨</span></div>
+        <div><span class="cat">BOARD</span><h3>스탠다드 보드</h3><p>부드러운 플렉스의 캠버 · 락커 보드.</p><span class="lv">입문 ~ 중급</span></div>
+        <div><span class="cat">BOARD</span><h3>하이엔드 보드</h3><p>해머데크 · 카빙 전용 데크 등 상급자 라인업.</p><span class="lv">중급 ~ 상급</span></div>
+        <div><span class="cat">WEAR</span><h3>스키 · 보드복</h3><p>상하의 세트, 점프슈트 등 사이즈별 다양하게 구비.</p><span class="lv">성인 · 아동</span></div>
+        <div><span class="cat">GEAR</span><h3>헬멧 · 고글 · 보호대</h3><p>안전 인증 제품만 사용하며 매회 살균 소독합니다.</p><span class="lv">성인 · 아동</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 예약 -->
+  <section class="sec gray" id="reserve">
+    <div class="inner">
+      <div class="sec-title">
+        <h2><small>RESERVATION</small>온라인 예약 · 문의</h2>
+        <p>예약 접수 후 영업시간 내 확인 연락을 드립니다.</p>
+      </div>
+      <div class="rsv">
+        <form id="rsvForm">
+          <div class="field"><label for="f-name">예약자명 <em>*</em></label><input id="f-name" required></div>
+          <div class="field"><label for="f-tel">연락처 <em>*</em></label><input id="f-tel" type="tel" required placeholder="010-0000-0000"></div>
+          <div class="field"><label for="f-date">이용 날짜 <em>*</em></label><input id="f-date" type="date" required></div>
+          <div class="field"><label for="f-num">인원</label>
+            <select id="f-num"><option>1명</option><option>2명</option><option>3명</option><option>4명</option><option>5명 이상 (단체)</option></select></div>
+          <div class="field"><label for="f-item">이용 상품</label>
+            <select id="f-item"><option>장비 렌탈</option><option>장비 + 의류 렌탈</option><option>리프트 패키지</option><option>강습</option></select></div>
+          <div class="field"><label for="f-time">이용 시간</label>
+            <select id="f-time"><option>주간</option><option>야간</option><option>심야</option></select></div>
+          <div class="field full"><label for="f-memo">요청사항</label><textarea id="f-memo" rows="4" placeholder="키, 발 사이즈, 실력 등을 남겨주시면 미리 준비해 드립니다."></textarea></div>
+          <label class="agree"><input type="checkbox" required> 개인정보 수집 및 이용에 동의합니다. (필수)</label>
+          <button type="submit" class="btn">예약 신청</button>
+        </form>
+        <aside>
+          <h3>전화 예약 · 문의</h3>
+          <a href="tel:010-0000-0000" class="big">010-0000-0000</a>
+          <dl>
+            <div><dt>상담 시간</dt><dd>시즌 중 매일 07:00 ~ 03:00</dd></div>
+            <div><dt>단체 예약</dt><dd>10인 이상 단체는 전화로 별도 견적 안내</dd></div>
+            <div><dt>예약 변경 · 취소</dt><dd>이용일 전날까지 전화로 변경 · 취소 가능</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 공지 / 오시는 길 -->
+  <section class="sec">
+    <div class="inner two">
+      <div id="notice">
+        <div class="sec-title"><h2><small>NOTICE</small>공지사항</h2><a href="#notice">전체보기</a></div>
+        <ul class="board">
+          <li><a href="#notice"><span class="k r">공지</span><span class="t">2026/27 시즌 영업 개시 안내</span><time>2026.10.15</time></a></li>
+          <li><a href="#notice"><span class="k r">이벤트</span><span class="t">시즌 오픈 기념 사전예약 최대 30% 할인</span><time>2026.10.10</time></a></li>
+          <li><a href="#notice"><span class="k">안내</span><span class="t">시즌 신규 장비 및 의류 입고 안내</span><time>2026.10.01</time></a></li>
+          <li><a href="#notice"><span class="k">안내</span><span class="t">단체 예약 및 견적 문의 방법</span><time>2026.09.20</time></a></li>
+          <li><a href="#notice"><span class="k">안내</span><span class="t">장비 분실 · 파손 규정 안내</span><time>2026.09.10</time></a></li>
+        </ul>
+      </div>
+      <div id="location">
+        <div class="sec-title"><h2><small>LOCATION</small>오시는 길</h2></div>
+        <div class="map">지도 영역</div>
+        <table class="loc">
+          <tr><th>주소</th><td>강원특별자치도 OO군 OO면 OO길 00</td></tr>
+          <tr><th>전화</th><td>010-0000-0000</td></tr>
+          <tr><th>주차</th><td>매장 앞 전용 주차장 무료 이용</td></tr>
+          <tr><th>셔틀</th><td>매장 ↔ 스키장 정문 무료 셔틀 운행 (20분 간격)</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="footer">
+  <div class="f-top">
+    <div class="inner">
+      <ul><li><a href="#top">회사소개</a></li><li><a href="#top">이용약관</a></li><li><a href="#top"><b>개인정보처리방침</b></a></li><li><a href="#location">오시는 길</a></li></ul>
+    </div>
+  </div>
+  <div class="f-body">
+    <div class="inner">
+      <div class="f-logo">지훈 렌탈샵</div>
+      <div class="f-info">
+        <p><span>상호 : 지훈 렌탈샵</span><span>대표자 : 김지훈</span><span>사업자등록번호 : 111111111</span></p>
+        <p><span>주소 : 강원특별자치도 OO군 OO면 OO길 00</span><span>고객센터 : 010-0000-0000</span></p>
+      </div>
+      <p class="copy">Copyright © 2026 지훈 렌탈샵. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="m-bar">
+  <a href="tel:010-0000-0000">전화 문의</a>
+  <a href="#reserve">온라인 예약</a>
+</div>
+
+<script>
+  // 모바일 메뉴
+  const header = document.getElementById('header');
+  document.getElementById('mMenu').addEventListener('click', () => header.classList.toggle('open'));
+  header.querySelectorAll('.gnb a').forEach(a => a.addEventListener('click', () => header.classList.remove('open')));
+
+  // 요금 탭
+  function showTab(id) {
+    document.querySelectorAll('#priceTab button').forEach(b => b.classList.toggle('on', b.dataset.tab === id));
+    document.querySelectorAll('.panel').forEach(p => p.classList.toggle('on', p.id === 'p-' + id));
+  }
+  document.querySelectorAll('[data-tab]').forEach(el => el.addEventListener('click', () => showTab(el.dataset.tab)));
+
+  // 레이어 팝업 (오늘 하루 보지 않기)
+  const pop = document.getElementById('pop');
+  const KEY = 'jihoon_pop_hide_until';
+  let hideUntil = 0;
+  try { hideUntil = Number(localStorage.getItem(KEY)) || 0; } catch (e) {}
+  if (Date.now() > hideUntil) pop.hidden = false;
+  const closePop = () => { pop.hidden = true; };
+  document.getElementById('popClose').addEventListener('click', closePop);
+  document.getElementById('popGo').addEventListener('click', closePop);
+  document.getElementById('popToday').addEventListener('click', () => {
+    const end = new Date(); end.setHours(23, 59, 59, 999);
+    try { localStorage.setItem(KEY, end.getTime()); } catch (e) {}
+    closePop();
+  });
+
+  // 예약 폼
+  document.getElementById('rsvForm').addEventListener('submit', e => {
+    e.preventDefault();
+    alert('예약 신청이 접수되었습니다.\n확인 후 연락드리겠습니다.');
+    e.target.reset();
+  });
+</script>
+</body>
+</html>

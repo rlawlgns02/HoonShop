@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>지훈 렌탈샵 웹사이트 시안</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body { font-family: 'Pretendard', -apple-system, 'Malgun Gothic', sans-serif; background: #e4e7eb; color: #111; display: flex; flex-direction: column; }
+  button { font: inherit; cursor: pointer; }
+
+  .bar { background: #111; color: #fff; display: flex; align-items: center; gap: 24px; padding: 0 20px; height: 60px; flex: none; flex-wrap: wrap; }
+  .bar h1 { font-size: 17px; font-weight: 800; margin-right: auto; white-space: nowrap; }
+  .bar h1 span { color: #8a9099; font-weight: 500; margin-left: 8px; font-size: 14px; }
+  .group { display: flex; border: 1px solid #444; }
+  .group button { background: none; border: 0; color: #aab0b9; height: 36px; padding: 0 16px; font-size: 14px; font-weight: 600; }
+  .group button + button { border-left: 1px solid #444; }
+  .group button.on { background: #fff; color: #111; }
+  .open { color: #fff; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+
+  .stage { flex: 1; display: flex; gap: 20px; padding: 20px; overflow: auto; justify-content: center; min-height: 0; }
+  .frame { display: flex; flex-direction: column; flex: 1; min-width: 0; max-width: 100%; transition: max-width .2s; }
+  .frame[hidden] { display: none; }
+  .frame .cap { display: flex; justify-content: space-between; align-items: center; background: #fff; border: 1px solid #c8ccd2; border-bottom: 0; padding: 8px 12px; font-size: 13px; font-weight: 700; }
+  .frame .cap a { color: #0050c8; font-weight: 500; }
+  .frame iframe { flex: 1; width: 100%; border: 1px solid #c8ccd2; background: #fff; min-height: 400px; }
+
+  body[data-device="tablet"] .frame { max-width: 820px; }
+  body[data-device="mobile"] .frame { max-width: 390px; }
+  body[data-device="mobile"] .stage .frame iframe, body[data-device="tablet"] .stage .frame iframe { max-height: 900px; }
+
+  @media (max-width: 760px) {
+    .bar { height: auto; padding: 12px 16px; gap: 10px; }
+    .bar h1 { width: 100%; }
+    .device-group { display: none; }
+    .stage { padding: 0; gap: 0; }
+    .frame .cap { display: none; }
+    .frame iframe { border: 0; }
+  }
+</style>
+</head>
+<body data-device="pc">
+  <div class="bar">
+    <h1>지훈 렌탈샵 <span>웹사이트 시안 비교</span></h1>
+    <div class="group" id="viewGroup">
+      <button type="button" data-view="1">시안 A</button>
+      <button type="button" data-view="2" class="on">시안 B</button>
+      <button type="button" data-view="both">나란히 보기</button>
+    </div>
+    <div class="group device-group" id="deviceGroup">
+      <button type="button" data-device="pc" class="on">PC</button>
+      <button type="button" data-device="tablet">태블릿</button>
+      <button type="button" data-device="mobile">모바일</button>
+    </div>
+    <a class="open" id="openLink" href="index2.html" target="_blank" rel="noopener">새 창으로 열기</a>
+  </div>
+
+  <div class="stage">
+    <div class="frame" id="frame1" hidden>
+      <div class="cap">시안 A · 컬러풀 / 라운드형 <a href="index1.html" target="_blank" rel="noopener">새 창</a></div>
+      <iframe src="index1.html" title="시안 A"></iframe>
+    </div>
+    <div class="frame" id="frame2">
+      <div class="cap">시안 B · 정돈된 기업형 <a href="index2.html" target="_blank" rel="noopener">새 창</a></div>
+      <iframe src="index2.html" title="시안 B"></iframe>
+    </div>
+  </div>
+
+<script>
+  const f1 = document.getElementById('frame1');
+  const f2 = document.getElementById('frame2');
+  const openLink = document.getElementById('openLink');
+
+  function setView(v) {
+    f1.hidden = v === '2';
+    f2.hidden = v === '1';
+    openLink.style.visibility = v === 'both' ? 'hidden' : 'visible';
+    openLink.href = v === '1' ? 'index1.html' : 'index2.html';
+    document.querySelectorAll('#viewGroup button').forEach(b => b.classList.toggle('on', b.dataset.view === v));
+    history.replaceState(null, '', '#' + v);
+  }
+  function setDevice(d) {
+    document.body.dataset.device = d;
+    document.querySelectorAll('#deviceGroup button').forEach(b => b.classList.toggle('on', b.dataset.device === d));
+  }
+  document.querySelectorAll('#viewGroup button').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
+  document.querySelectorAll('#deviceGroup button').forEach(b => b.addEventListener('click', () => setDevice(b.dataset.device)));
+
+  const initial = location.hash.slice(1);
+  setView(['1', '2', 'both'].includes(initial) ? initial : '2');
+</script>
+</body>
+</html>
